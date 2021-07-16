@@ -1,0 +1,94 @@
+<!-- Header -->
+<header class="toolbar">
+  <div class="container">
+    <div class="menu">
+      <div class="logo">
+        <img width="40" alt="E-commerce Logo" src="../../assets/img/logo.png">
+        <span>E-commerce</span>
+      </div>
+
+      <div class="links">
+        <a href="/" aria-label="Home" title="Home">
+          Home 
+        </a>
+        <a href="?school=2" aria-label="School 2" title="School 2">
+          School 2
+        </a>
+        <a href="?school=3" aria-label="School 3" title="School 3">
+          School 3
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Banner -->
+<section class="banner" [ngStyle]="getBannerStyle()">
+  <div class="container">
+    <div class="infos">
+      <div class="title">
+        <h1 [innerHTML]="banner.title"></h1>
+      </div>
+      <div class="subtitle">
+        <h3 [innerHTML]="banner.subtitle"></h3>
+      </div>
+      <div class="links-banner">
+        <a [href]="'get/' + banner.id" class="button btn_banner">
+          {{ banner.buttonText }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main -->
+<section class="main">
+  <div class="container">
+    <div class="page-title">
+      <h2>Todos os cursos</h2>
+    </div>
+
+    <div class="category" *ngFor="let category of categories">
+      <h3>{{ category.name }}</h3>
+
+      <div class="tag" *ngFor="let tag of category.category_tags">
+        <h4>{{ tag.name }}</h4>
+
+        <carousel [height]="240" [cellWidth]="260">
+          <div class="carousel-cell" *ngFor="let course of tag.category_tag_courses">
+
+            <div class="course" *ngIf="hasCoursesObj()">
+              <a [href]="'courses/' + getCourse(course.courseId).id">
+                <div class="course-image">
+                  <img [src]="getCourse(course.courseId).image" [alt]="getCourse(course.courseId).name" [title]="getCourse(course.courseId).name" loading="lazy">
+                </div>
+                <div class="course-content">
+                  <div class="course-title">
+                    {{ getCourse(course.courseId).name }}
+                  </div>
+                  <div class="course-information">
+                    <div class="duration">
+                      <i class="far fa-clock"></i>
+                      {{ getCourse(course.courseId).duration }}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </carousel>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-wrapper">
+      <h4>© E-commerce. 2021</h4>
+    </div>
+  </div>
+</footer>
